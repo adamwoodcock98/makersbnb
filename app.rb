@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 require 'sinatra/base'
 require 'sinatra/reloader'
 require_relative './lib/listing'
@@ -24,4 +22,3 @@ class MakersBnB < Sinatra::Base
 
   run! if app_file == $0
 end
->>>>>>> Stashed changes
