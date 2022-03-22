@@ -1,0 +1,53 @@
+body {
+  font-family: verdana;
+}
+
+h1 {
+  color: rgb(36, 36, 36);
+  font-size: 32pt;
+  text-align: center;
+}
+
+h2 {
+  color: coral;
+  font-style: italic;
+}
+
+h4 {
+  font-style: italic;
+}
+
+input {
+  width: 300pt;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+textarea {
+  width: 300pt;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+table.center {
+  width: 60%;
+  margin-left: 20%; 
+  margin-right: 20%;
+  border-bottom: 1px solid #ddd;
+  
+}
+
+table:hover {
+  background-color: coral;
+}
+
+th, td {
+  padding: 10px;
+  margin: 8px;
+}
+
+tr {
+  border: 1px solid;
+}

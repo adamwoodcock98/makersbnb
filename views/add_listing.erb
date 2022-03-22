@@ -1,6 +1,15 @@
+<title>Add listing</title>
+<head>
+  <link href="<%= url('/style.css') %>" rel="stylesheet" type="text/css" />
+</head>
+
+<h1>Add a new listing</h1>
+
+<div style="text-align: center;">
 <form action='/listings' method='POST'>
   <input type='text' name='name-space' placeholder='Add your space...'/> <br>
   <textarea type='text' name='description-space' placeholder='Describe your space...'></textarea> <br>
   <input type='number' name='price-space' placeholder='Add price...'/> <br>
   <input type='submit' value='List home' /><br>
 </form>
+</div>
