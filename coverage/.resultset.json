@@ -1,7 +1,26 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/adamwoodcock/Documents/Coding/Makers/Projects/makersbnb/spec/feature/view_all_listings_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          0,
+          0,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/adamwoodcock/Documents/Coding/Makers/Projects/makersbnb/spec/unit/listing_spec.rb": {
+        "lines": [
+
+        ]
+      }
     },
-    "timestamp": 1647884109
+    "timestamp": 1647949078
   }
 }
