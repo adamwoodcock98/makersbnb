@@ -10,26 +10,23 @@ class MakersBnB < Sinatra::Base
   enable :sessions
   
   get '/listings' do
-      @listings = Listing.all
-      erb :listings
-    end
+    @listings = Listing.all
+    erb :listings
+  end
 
   post '/listings' do
     redirect '/listings/new'
   end
- 
-  get '/' do
-    @listing = session["new_listing"]
-    erb :view_listings
-  end
 
-  get '/new' do
+  get '/listings/new' do
     erb :add_listing
   end
 
-  post '/add-new-listing' do
-    session["new_listing"] = Listing.create(name: params["name-space"], description: params["description-space"], price: params["price-space"])
-    redirect "/"
+  post '/listings/new' do
+    session['new_listing'] = 
+Listing.create(name: params['name-space'], description: params['description-space'], 
+price: params['price-space'])
+    redirect '/listings'
   end
 
   run! if app_file == $0

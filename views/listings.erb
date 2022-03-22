@@ -8,12 +8,10 @@
 
 <br>
 
-<ul>  
   <% @listings.each do |listing| %>
-    <li><div style='border-style: solid'>
+    <div style='border-style: solid'>
       <h2><%= listing.name %></h2>
       <h3><%= listing.description %></h3>
       <h3>£<%= listing.price %>.00 per night</h3>   
-    </div></li>
+    </div>
   <% end %>
-</ul>

@@ -1,4 +1,8 @@
 feature 'Viewing All Listings' do
+
+  before do
+    populate_listings_table
+  end
   
   scenario 'Basic UI' do
     visit '/listings'

@@ -12,7 +12,7 @@ SimpleCov.start
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
-require './app.rb'
+require './app'
 require_relative './support/database_helper'
 
 Capybara.app = MakersBnB
@@ -34,4 +34,4 @@ RSpec.configure do |config|
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
-  end
+end
