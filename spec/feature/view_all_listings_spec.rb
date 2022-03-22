@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 feature 'Viewing All Listings' do
   
   scenario 'Basic UI' do
@@ -17,4 +15,3 @@ feature 'Viewing All Listings' do
   end
 
 end
->>>>>>> Stashed changes
