@@ -1,5 +1,6 @@
 require 'listing'
-require 'pg'
+
+    require 'pg'
 
 describe '.all' do
   #replace with self.create when merged
@@ -18,5 +19,17 @@ describe '.all' do
     expect(listings.first.name).to eq 'Mid-Century Modern Home'
     expect(listings.first.description).to eq 'In beautiful, sunny Miami by the Oc...'
     expect(listings.first.price).to eq 200
+    
+  end
+end
+  
+  describe Listing do
+  it "should be able to create a new listing" do
+
+    listing = Listing.create(name: "Italian villa", description: "A villa by the beach", price: 200)
+
+    expect(listing.name).to eq("Italian villa")
+    expect(listing.description).to eq("A villa by the beach")
+    expect(listing.price).to eq(20000)
   end
 end

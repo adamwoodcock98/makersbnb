@@ -6,20 +6,31 @@ class MakersBnB < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
-
-  get '/' do
-    "Hello World"
-  end
-
+  
+  enable :sessions
+  
   get '/listings' do
-    @listings = Listing.all
-    erb :listings
-  end
+      @listings = Listing.all
+      erb :listings
+    end
 
   post '/listings' do
     redirect '/listings/new'
   end
+ 
+  get '/' do
+    @listing = session["new_listing"]
+    erb :view_listings
+  end
 
+  get '/new' do
+    erb :add_listing
+  end
+
+  post '/add-new-listing' do
+    session["new_listing"] = Listing.create(name: params["name-space"], description: params["description-space"], price: params["price-space"])
+    redirect "/"
+  end
 
   run! if app_file == $0
 end
