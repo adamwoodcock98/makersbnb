@@ -1,26 +1,49 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/adamwoodcock/Documents/Coding/Makers/Projects/makersbnb/spec/feature/view_all_listings_spec.rb": {
+      "/Users/abdulhussain/Projects/Week-5/makersbnb/spec/feature/add_new_listing_spec.rb": {
         "lines": [
           1,
           null,
           1,
           1,
           1,
-          0,
-          0,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
           null,
           null,
           null
         ]
       },
-      "/Users/adamwoodcock/Documents/Coding/Makers/Projects/makersbnb/spec/unit/listing_spec.rb": {
+      "/Users/abdulhussain/Projects/Week-5/makersbnb/spec/feature/view_all_listings_spec.rb": {
         "lines": [
 
         ]
+      },
+      "/Users/abdulhussain/Projects/Week-5/makersbnb/spec/unit/listing_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
       }
     },
-    "timestamp": 1647949078
+    "timestamp": 1647961675
   }
 }
