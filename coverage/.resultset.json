@@ -1,7 +1,38 @@
 {
   "RSpec": {
     "coverage": {
+<<<<<<< Updated upstream
     },
     "timestamp": 1647884109
+=======
+      "/Users/adamwoodcock/Documents/Coding/Makers/Projects/makersbnb/spec/feature/view_all_listings_spec.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null
+        ]
+      },
+      "/Users/adamwoodcock/Documents/Coding/Makers/Projects/makersbnb/spec/unit/listing_spec.rb": {
+        "lines": [
+
+        ]
+      }
+    },
+    "timestamp": 1647952955
+>>>>>>> Stashed changes
   }
 }
