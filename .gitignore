@@ -1,1 +1,5 @@
-coverage/
+# Locally cached Makers Linter file for Rubocop 
+.rubocop-https-*
+
+# SimpleCov output folder
+/coverage
