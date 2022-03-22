@@ -1,8 +1,12 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'sinatra/activerecord'
 require_relative './lib/listing'
 
 class MakersBnB < Sinatra::Base
+  # Check this is needed if configuration is done through config.yml
+  register Sinatra::ActiveRecordExtension
+  
   configure :development do
     register Sinatra::Reloader
   end
@@ -23,9 +27,11 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/listings/new' do
-    session['new_listing'] = 
-Listing.create(name: params['name-space'], description: params['description-space'], 
-price: params['price-space'])
+    session['new_listing'] = Listing.create(
+      name: params['name-space'],
+      description: params['description-space'],
+      price: params['price-space']
+    )
     redirect '/listings'
   end
 
