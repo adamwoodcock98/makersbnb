@@ -20,17 +20,17 @@ class MakersBnB < Sinatra::Base
     erb :listings
   end
 
-  get '/listings/new' do
-    erb :add_listing
-  end
-
   post '/listings' do
     Listing.create(
       name: params['name-space'],
       description: params['description-space'], 
-      price: params['price-space']
+      pence_price: (params['price-space'] * 100)
     )
     redirect '/listings'
+  end
+
+  get '/listings/new' do
+    erb :add_listing
   end
   
   get '/listings/:id' do

@@ -31,7 +31,7 @@
         </tr>
         <tr>
           <td><p><%= listing.description %></p></td>
-          <td style="text-align:right;"><h4>£<%= listing.price %>.00 per night</h4></td>
+          <td style="text-align:right;"><h4>£<%= (listing.pence_price / 100) %>.00 per night</h4></td>
         </tr>
       </table>
     </div>
