@@ -1,7 +1,7 @@
 feature 'viewing an individual listing' do
 
   scenario 'should display property info' do
-    property = Listing.create(name: "Serene Woodland Cabin", description: "Nestled deep in the forest is this beautiful, cosy cabin. Perfect for a romantic getaway", price: 85)
+    property = Listing.create(name: "Serene Woodland Cabin", description: "Nestled deep in the forest is this beautiful, cosy cabin. Perfect for a romantic getaway", pence_price: 85)
     
     visit '/listings'
     first('.listing').click_on 'view details'
