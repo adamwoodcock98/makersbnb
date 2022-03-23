@@ -24,6 +24,10 @@ input {
   box-sizing: border-box;
 }
 
+input.details {
+  width: 80pt;
+}
+
 textarea {
   width: 300pt;
   padding: 12px 20px;

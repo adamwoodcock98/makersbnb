@@ -10,6 +10,8 @@ class MakersBnB < Sinatra::Base
   configure :development do
     register Sinatra::Reloader
   end
+
+  enable :method_override
   
   get '/listings' do
     @listings = Listing.all
@@ -28,8 +30,11 @@ class MakersBnB < Sinatra::Base
     )
     redirect '/listings'
   end
-
   
+  get '/listings/:id' do
+    @listing = Listing.all.first
+    erb :view_property
+  end
 
   run! if app_file == $0
 end
