@@ -29,5 +29,25 @@ class MakersBnB < Sinatra::Base
     redirect '/listings'
   end
 
+  get '/users/new' do
+    erb :new_user
+  end
+    
+  post '/users' do
+    # p "first_name: #{params['first_name']}"
+    # p "last_name: #{params['last_name']}"
+    # p "user_name: #{params['user_name']}"
+    # p "email: #{params['email']}"
+    # p "password: #{params['password']}"
+    User.new(
+      first_name: params['first_name'],
+      last_name: params['last_name'],
+      user_name: params['user_name'],
+      email: params['email'],
+      password: params['password'],
+    )
+    erb :welcome_user
+  end
+
   run! if app_file == $0
 end
