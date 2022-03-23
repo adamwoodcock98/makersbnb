@@ -1,0 +1,10 @@
+<title><%= @listing.name%></title>
+<head>
+  <link href="<%= url('/style.css') %>" rel="stylesheet" type="text/css" />
+</head>
+
+<h1><%= @listing.name %></h1>
+<div style="text-align:center;">
+  <h2><%= @listing.description%></h2>
+  <h3>£<%= @listing.price%>.00</h3>
+</div>
