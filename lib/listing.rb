@@ -1,6 +1,10 @@
 require 'pg'
 
 class Listing < ActiveRecord::Base
+  def price
+    pence_price.to_i / 100
+  end
+
   # attr_reader :name, :description, :price, :id
 
   # def initialize(id:, name:, description:, price:)
