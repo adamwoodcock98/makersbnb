@@ -29,5 +29,7 @@ class MakersBnB < Sinatra::Base
     redirect '/listings'
   end
 
+  
+
   run! if app_file == $0
 end
