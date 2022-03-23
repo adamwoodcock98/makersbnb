@@ -1,8 +1,12 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'sinatra/activerecord'
 require_relative './lib/listing'
 
 class MakersBnB < Sinatra::Base
+  # Check this is needed if configuration is done through config.yml
+  register Sinatra::ActiveRecordExtension
+  
   configure :development do
     register Sinatra::Reloader
   end

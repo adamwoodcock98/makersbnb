@@ -3,9 +3,12 @@
 source "https://rubygems.org"
 
 gem 'pg'
+gem 'activerecord'
 gem 'sinatra'
 gem 'sinatra-contrib'
+gem 'sinatra-activerecord'
 gem 'webrick'
+gem 'rake'
 
 group :test do
   gem 'rspec'
