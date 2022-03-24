@@ -17,6 +17,7 @@ class MakersBnB < Sinatra::Base
   end
 
   enable :method_override
+  enable :sessions
   
   get '/listings' do
     @listings = Listing.all
@@ -58,11 +59,6 @@ class MakersBnB < Sinatra::Base
   end
     
   post '/users' do
-    # p "first_name: #{params['first_name']}"
-    # p "last_name: #{params['last_name']}"
-    # p "user_name: #{params['user_name']}"
-    # p "email: #{params['email']}"
-    # p "password: #{params['password']}"
     @user = User.create(
       first_name: params['first_name'],
       last_name: params['last_name'],
@@ -70,8 +66,21 @@ class MakersBnB < Sinatra::Base
       email: params['email'],
       password: params['password'],
     )
-    # @user.save!
     erb :welcome_user
+  end
+
+  get '/sessions/new' do
+    erb :sign_in
+  end
+
+  post '/sessions' do
+    user_id = User.authenticate(email: params['email'], password: params['password'])
+    if user_id
+      session[:user_id]
+      erb :sign_in_success
+    else
+      erb :sign_in_failure
+    end
   end
 
   run! if app_file == $0
