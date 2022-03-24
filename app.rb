@@ -48,6 +48,7 @@ class MakersBnB < Sinatra::Base
     erb :view_property
   end
 
+  # This route is currently untested
   get '/listings/:id/availability' do
     @listing = Listing.find(params[:id])
     @selected_start = session[:selected_start]
@@ -55,12 +56,14 @@ class MakersBnB < Sinatra::Base
     erb :availability
   end
 
+  # This route is currently untested
   post '/listings/:id/availability' do
     session[:selected_start] = params[:start_date]
     session[:selected_end] = params[:end_date]
     redirect "/listings/#{params[:id]}/availability"
   end
 
+  # This route is currently untested
   post '/requests/:id/availability/request' do
     Booking.create(
       guest_id: 8,
