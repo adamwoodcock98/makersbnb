@@ -15,7 +15,7 @@ feature 'Sign In' do
     click_button('Sign in')
     fill_in 'email', with: 'bats@example.com'
     fill_in 'password', with: 'TheJokerSmells'
-    click_button('Sign in')
+    find('#create_new_session').click_button('Sign in')
     expect(page).to have_content('You have signed in correctly')
   end
   scenario 'when a user provides incorrect details they cannot sign-in' do
@@ -24,7 +24,7 @@ feature 'Sign In' do
     click_button('Sign in')
     fill_in 'email', with: 'gary@example.com'
     fill_in 'password', with: 'ItsBritney'
-    click_button('Sign in')
+    find('#create_new_session').click_button('Sign in')
     expect(page).to have_content('Please check your email and password')
   end
 end
