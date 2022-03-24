@@ -1,11 +1,11 @@
 feature 'Guest requests booking' do
   before do
-    Listing.create(
+    listing = Listing.create(
       name: 'Cute Cottage', 
       description: 'xyz', 
       pence_price: 20000, 
       host_id: 5)
-
+    
       Listing.create(
       name: 'Cute Cottage 2', 
       description: 'xyz xyz', 
@@ -16,7 +16,7 @@ feature 'Guest requests booking' do
   scenario 'Guest can request a specific property booking' do
     
     visit '/requests-confirmation'
-  
+
     booking = Booking.create(listing_id: 1)
 
     expect(current_path).to eq('/requests-confirmation')

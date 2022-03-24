@@ -60,7 +60,6 @@ class MakersBnB < Sinatra::Base
   # This route is currently untested
   post '/listings/:id/availability' do
     session[:selected_start] = params[:start_date]
-    p "Start Date #{session[:selected_date]}"
     session[:selected_end] = params[:end_date]
     redirect "/listings/#{params[:id]}/availability"
   end
@@ -68,15 +67,20 @@ class MakersBnB < Sinatra::Base
   # This route is currently untested
   post '/requests/:id/availability/request' do
     @user = current_user
-    p "Start Date #{params["start_date"]}"
    @booking = Booking.create(
       guest_id: @user.id,
       listing_id: params["listing_id"],
-      start_date: params["start_date"],
-      end_date: params["end_date"],
+      # abduls notes: Session variables for start and end dates are being saved correctly, the issue is you cannot use param in the lines
+      # 79 and 80 to ask for start and end dates.
+      # start_date: params["start_date"],
+      # end_date: params["end_date"],
+      start_date: session[:selected_start],
+      end_date: session[:selected_end],
+
       is_approved: false
     )
     @listing = Listing.find_by(id: @booking.listing_id)
+    p @listing.name
     
     
     erb :requests
