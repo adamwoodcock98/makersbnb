@@ -34,7 +34,8 @@ class MakersBnB < Sinatra::Base
     Listing.create(
       name: params['name'],
       description: params['description'], 
-      pence_price: (params['price'].to_i * 100)
+      pence_price: (params['price'].to_i * 100),
+      host_id: params['host']
     )
     redirect '/listings'
   end
@@ -59,19 +60,26 @@ class MakersBnB < Sinatra::Base
   # This route is currently untested
   post '/listings/:id/availability' do
     session[:selected_start] = params[:start_date]
+    p "Start Date #{session[:selected_date]}"
     session[:selected_end] = params[:end_date]
     redirect "/listings/#{params[:id]}/availability"
   end
 
   # This route is currently untested
   post '/requests/:id/availability/request' do
-    Booking.create(
-      guest_id: 8,
+    @user = current_user
+    p "Start Date #{params["start_date"]}"
+   @booking = Booking.create(
+      guest_id: @user.id,
       listing_id: params["listing_id"],
-      start_date: params["start date"],
+      start_date: params["start_date"],
       end_date: params["end_date"],
       is_approved: false
     )
+    @listing = Listing.find_by(id: @booking.listing_id)
+    
+    
+    erb :requests
   end
 
   get '/users/new' do
