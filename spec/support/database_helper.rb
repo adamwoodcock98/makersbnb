@@ -16,21 +16,20 @@ module DatabaseHelper
     DatabaseCleaner.clean
   end
 
-  def populate_listings_table(db_name = 'makersbnb_test')
-    defaults = [
-      { name: 'Mid-Century Modern Home', description: 'In beautiful, sunny Miami by the Oc...', pence_price: 20_000, host_id: 9 },
-      { name: 'Big House', description: "Big old house", pence_price: 1800, host_id: 3 },
-      { name: 'Little House', description: "Wee little house", pence_price: 950, host_id: 2 },
-      { name: 'Cardboard Box', description: "Eco-friendly living", pence_price: 300, host_id: 6 },
-    ]
-    defaults.each do |entry|
-      params = [
-        entry[:name],
-        entry[:description],
-        entry[:pence_price],
-        entry[:host_id]
-      ]
-      connection(db_name).exec_params("INSERT INTO listings (name, description, pence_price, host_id) VALUES ($1, $2, $3, $4);", params)
+  def populate_listings_table
+      Listing.create(name: 'Mid-Century Modern Home', description: 'In beautiful, sunny Miami by the Oc...', pence_price: 20000, host_id: 9)
+      Listing.create(name: 'Big House', description: "Big old house", pence_price: 1800, host_id: 3)
+      Listing.create(name: 'Little House', description: "Wee little house", pence_price: 950, host_id: 2)
+      Listing.create(name: 'Cardboard Box', description: "Eco-friendly living", pence_price: 300, host_id: 6)
+  end
+
+  def check_table_exists(db_name = 'makersbnb_test', table_name = 'listings')
+    response = connection(db_name).exec("SELECT EXISTS (SELECT FROM pg_tables WHERE schemaname = 'public' AND tablename = '#{table_name}');")
+    if response[0]['exists'] == 't'
+      return true
+    else
+      return false
     end
   end
+  
 end
