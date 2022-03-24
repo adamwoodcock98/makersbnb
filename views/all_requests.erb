@@ -1,0 +1,35 @@
+<head>
+  <link href="<%= url('/style.css') %>" rel="stylesheet" type="text/css" />
+</head>
+
+<% if current_user != nil %>
+  <div style="text-align:center;">
+    <h1>Hello, <%=@user.first_name.titleize%></h1>
+    <h2>Your requests</h2>
+    <br>
+    <table class="center">
+      <tr>
+        <th><h1>Requests you've made</h1></th>
+        <th><h1>Requests you've received</h1></th>
+      </tr>
+
+      <%@guest_requests.each { |listing| %>
+        <tr>
+          <td><h2><%= Listing.find(listing.listing_id).name %></h2></td>
+        </tr>
+        <tr>
+          <td><h4><%= Listing.find(listing.listing_id).description %></h4></td>
+        </tr>
+        <tr>
+          <td><body>From <%=listing.start_date%> to <%=listing.end_date%></body></td>
+        </tr>
+        <tr>
+          <td><br></td>
+        </tr>
+      <% } %>
+
+    </table>
+  </div>
+<% else %>
+  <h1>Please sign in to view requests</h2>
+<% end %>

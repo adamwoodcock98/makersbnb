@@ -67,11 +67,17 @@ class MakersBnB < Sinatra::Base
   post '/requests/:id/availability/request' do
     Booking.create(
       guest_id: 8,
-      listing_id: params["listing_id"],
-      start_date: params["start date"],
-      end_date: params["end_date"],
+      listing_id: params[:id],
+      start_date: params['start_date'],
+      end_date: params['end_date'],
       is_approved: false
     )
+  end
+
+  get '/requests' do
+    @user = current_user
+    @guest_requests = Booking.where(guest_id: @user.id) unless current_user == nil
+    erb :all_requests
   end
 
   get '/users/new' do

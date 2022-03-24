@@ -75,3 +75,14 @@ tr {
   justify-content: flex-end;
   align-items: right;
   }
+
+  .column {
+    float: left;
+    width: 30%;
+  }
+
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
