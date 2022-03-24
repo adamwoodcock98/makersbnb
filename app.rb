@@ -6,7 +6,6 @@ require_relative './lib/booking'
 
 
 class MakersBnB < Sinatra::Base
-  # Check this is needed if configuration is done through config.yml
   register Sinatra::ActiveRecordExtension
   
   configure :development do
@@ -22,9 +21,9 @@ class MakersBnB < Sinatra::Base
 
   post '/listings' do
     Listing.create(
-      name: params['name-space'],
-      description: params['description-space'], 
-      pence_price: (params['price-space'] * 100)
+      name: params['name'],
+      description: params['description'], 
+      pence_price: (params['price'].to_i * 100)
     )
     redirect '/listings'
   end
@@ -38,16 +37,16 @@ class MakersBnB < Sinatra::Base
     erb :view_property
   end
 
-  get '/requests_page' do
-    erb :requests_page
-  end
-
   post '/requests_page' do
 
     Booking.create(
       start_date: params["start date"],
       end_date: params["end date"]
     )
+  end
+
+  post '/listings/:id/availability' do
+
   end
 
   run! if app_file == $0

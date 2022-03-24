@@ -10,11 +10,19 @@
 </div>
 
 <div style="text-align:center;">
-  <form action="/requests_page" method="post" target="_blank">
+  <form action="/listings/<%= @listing.id %>/availability" method="post" target="_blank">
     <label for="start date">Start Date:</label>
     <input type="date" id="start_date" name="start_date" required><br><br>
     <label for="end date">End Date:</label>
     <input type="date" id="end_date" name="end_date" required><br><br>
-    <input type="submit" value="Request to book">
+    <input type="submit" value="Check availability">
   </form>
+</div>
+
+<div style="text-align:center;">
+  <h4>Great news! This property is available to book for your selected dates.</h4>
+</div>
+
+<div style="text-align:center;">
+  
 </div>
