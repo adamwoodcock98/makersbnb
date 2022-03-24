@@ -17,8 +17,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_23_221719) do
   create_table "bookings", force: :cascade do |t|
     t.integer "guest_id"
     t.integer "listing_id"
-    t.date "start_date"
-    t.date "end_date"
+    t.string "start_date"
+    t.string "end_date"
     t.boolean "is_approved"
   end
 
