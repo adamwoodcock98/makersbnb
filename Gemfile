@@ -9,6 +9,7 @@ gem 'sinatra-contrib'
 gem 'sinatra-activerecord'
 gem 'webrick'
 gem 'rake'
+gem 'bcrypt'
 
 group :test do
   gem 'rspec'
