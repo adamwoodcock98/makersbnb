@@ -3,13 +3,14 @@ require 'sinatra/reloader'
 require 'sinatra/activerecord'
 require_relative './lib/listing'
 require_relative './lib/booking'
+require_relative './lib/user'
 
 
 class MakersBnB < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   
   # Stop debug output to terminal
-  ActiveRecord::Base.logger.level = 1
+  ActiveRecord::Base.logger.level = 1 unless ActiveRecord::Base.logger.nil?
 
   configure :development do
     register Sinatra::Reloader
@@ -62,13 +63,14 @@ class MakersBnB < Sinatra::Base
     # p "user_name: #{params['user_name']}"
     # p "email: #{params['email']}"
     # p "password: #{params['password']}"
-    User.new(
+    @user = User.create(
       first_name: params['first_name'],
       last_name: params['last_name'],
       user_name: params['user_name'],
       email: params['email'],
       password: params['password'],
     )
+    # @user.save!
     erb :welcome_user
   end
 
