@@ -13,7 +13,9 @@ class MakersBnB < Sinatra::Base
   ActiveRecord::Base.logger.level = 1 unless ActiveRecord::Base.logger.nil?
 
   configure :development do
+    # :nocov:
     register Sinatra::Reloader
+    # :nocov:
   end
 
   enable :method_override
