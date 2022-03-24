@@ -1,0 +1,36 @@
+<title><%= @listing.name%></title>
+<head>
+  <link href="<%= url('/style.css') %>" rel="stylesheet" type="text/css" />
+</head>
+
+<h1><%= @listing.name %></h1>
+<div style="text-align:center;">
+  <h2><%= @listing.description%></h2>
+  <h3>£<%= (@listing.pence_price / 100)%>.00 per night</h3>
+</div>
+
+<div style="text-align:center;">
+  <form action="/listings/<%= @listing.id %>/availability" method="post" target="_self">
+    <label for="start date">Start Date:</label>
+    <input type="date" id="start_date" name="start_date" value=<%=@selected_start%> required><br><br>
+    <label for="end date">End Date:</label>
+    <input type="date" id="end_date" name="end_date" value=<%=@selected_end%> required><br><br>
+    <input type="submit" value="Check availability">
+  </form>
+</div>
+
+<% if @listing.available?(start_date: @selected_start, end_date: @selected_end) == true %>
+  <div style="text-align:center;">
+    <h4>Great news! This property is available to book for your selected dates.</h4>
+    <body>The price for your <%= @listing.number_of_nights(@selected_start, @selected_end) %> night trip is: </body><br>
+    <h4> £<%= @listing.cost(@selected_start, @selected_end)%>.00 inc. VAT </h4>
+    <form action='/requests/:id/availability/request' method="post">
+      <input type="submit" value="Request booking">
+      <input type="hidden" value=<%=@listing.id%> name="listing_id">
+    </form>
+  </div>
+<% else %>
+  <div style="text-align:center;">
+        <h4>Sorry, this property is unavailable to book for your selected dates. Please select alternative dates and try again.</h4>
+  </div>
+<% end %>

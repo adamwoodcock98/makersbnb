@@ -13,6 +13,7 @@ class MakersBnB < Sinatra::Base
   end
 
   enable :method_override
+  enable :sessions
   
   get '/listings' do
     @listings = Listing.all
@@ -33,20 +34,31 @@ class MakersBnB < Sinatra::Base
   end
   
   get '/listings/:id' do
-    @listing = Listing.all.first
+    @listing = Listing.find(params[:id])
     erb :view_property
   end
 
-  post '/requests_page' do
-
-    Booking.create(
-      start_date: params["start date"],
-      end_date: params["end date"]
-    )
+  get '/listings/:id/availability' do
+    @listing = Listing.find(params[:id])
+    @selected_start = session[:selected_start]
+    @selected_end = session[:selected_end]
+    erb :availability
   end
 
   post '/listings/:id/availability' do
+    session[:selected_start] = params[:start_date]
+    session[:selected_end] = params[:end_date]
+    redirect "/listings/#{params[:id]}/availability"
+  end
 
+  post '/requests/:id/availability/request' do
+    Booking.create(
+      guest_id: 8,
+      listing_id: params["listing_id"],
+      start_date: params["start date"],
+      end_date: params["end_date"],
+      is_approved: false
+    )
   end
 
   run! if app_file == $0
