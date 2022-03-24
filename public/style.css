@@ -63,5 +63,15 @@ tr {
   padding: 15px 25px;
   text-align: center;
   font-size: 16px;
-  cursor: pointer;  
+  cursor: pointer; 
+  width: 100px; 
+  padding: 10px;
+  margin: 10px;
 }
+
+.navbar{
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: right;
+  }
