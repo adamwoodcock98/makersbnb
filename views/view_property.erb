@@ -1,0 +1,28 @@
+<title><%= @listing.name%></title>
+<head>
+  <link href="<%= url('/style.css') %>" rel="stylesheet" type="text/css" />
+</head>
+
+<h1><%= @listing.name %></h1>
+<div style="text-align:center;">
+  <h2><%= @listing.description%></h2>
+  <h3>£<%= (@listing.pence_price / 100)%>.00 per night</h3>
+</div>
+
+<div style="text-align:center;">
+  <form action="/listings/<%= @listing.id %>/availability" method="post" target="_blank">
+    <label for="start date">Start Date:</label>
+    <input type="date" id="start_date" name="start_date" required><br><br>
+    <label for="end date">End Date:</label>
+    <input type="date" id="end_date" name="end_date" required><br><br>
+    <input type="submit" value="Check availability">
+  </form>
+</div>
+
+<div style="text-align:center;">
+  <h4>Great news! This property is available to book for your selected dates.</h4>
+</div>
+
+<div style="text-align:center;">
+  
+</div>

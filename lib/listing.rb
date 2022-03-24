@@ -1,40 +1,24 @@
 require 'pg'
 
 class Listing < ActiveRecord::Base
-  # attr_reader :name, :description, :price, :id
 
-  # def initialize(id:, name:, description:, price:)
-  #   @id = id
-  #   @name = name
-  #   @description = description
-  #   @price = price
-  # end
+  def available?(start_date:, end_date:)
+    get_range_of_dates(start_date, end_date).each { |date| 
+      return false if Booking.where(listing_id: id, start_date: date, is_approved: true) != nil
+    }
+    return true
+  end
   
-#   def self.all
-#     if ENV['ENVIRONMENT'] == 'test'
-#       connection = PG.connect(dbname: "makersbnb_test")
-#     else
-#       connection = PG.connect(dbname: "makersbnb")
-#     end
-#     result = connection.exec('SELECT * FROM listings')
-#     result.map do |listing| 
-#       Listing.new(id: listing['id'], name: listing['name'], description: listing['description'], 
-# price: (listing['price']).to_i / 100)
-#     end
-#   end
+  def price
+    pence_price.to_i / 100
+  end
+  
+  # Do we have to use a class method for the above, is there a way for active record to wrap this in an initialise, so we can use normal methods that can acc
 
-  # def self.create(name:, description:, price:)
-  #   if ENV['ENVIRONMENT'] == 'test'
-  #     connection = PG.connect(dbname: "makersbnb_test")
-  #   else
-  #     connection = PG.connect(dbname: "makersbnb")
-  #   end
-  #   result = connection.exec_params(
-  #   'INSERT INTO listings (name, description, price) VALUES($1, $2, $3) RETURNING id, name, description, price', [
-  #   name, description, (price.to_i * 100)])
+  private
 
-  #   Listing.new(id: result[0]['id'], name: result[0]['name'], 
-  #   description: result[0]['description'], price: result[0]['price'].to_i / 100)
-  # end
+  def get_range_of_dates(start_date, end_date)
+    (Date.parse(start_date)..Date.parse(end_date)).to_a
+  end
 
 end

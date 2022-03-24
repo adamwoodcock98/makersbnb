@@ -21,7 +21,7 @@ RSpec.configure do |config|
   config.include DatabaseHelper
 
   config.before(:each) do
-    truncate_table('makersbnb_test', 'listings')  
+    truncate_table
   end
 
   config.expect_with :rspec do |expectations|

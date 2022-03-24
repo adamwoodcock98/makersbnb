@@ -19,14 +19,21 @@
 
 
   <% @listings.each do |listing| %>
-    <table class="center" >
-      <tr>
-        <td><h3><%= listing.name %></h3></td>
-      </tr>
-      <tr>
-        <td><p><%= listing.description %></p></td>
-        <td style="text-align:right;"><h4>£<%= listing.price %>.00 per night</h4></td>
-      </tr>
-    </table>
+    <div class="listing">
+      <table class="center" >
+        <tr>
+          <td><h3><%= listing.name %></h3></td>
+          <td style="text-align: right;"> 
+            <form action="/listings/<%= listing.id %>">
+              <input type='submit' value='view details'/>
+            </form> 
+          </td>
+        </tr>
+        <tr>
+          <td><p><%= listing.description %></p></td>
+          <td style="text-align:right;"><h4>£<%= (listing.pence_price / 100) %>.00 per night</h4></td>
+        </tr>
+      </table>
+    </div>
   <% end %>
 </table>
