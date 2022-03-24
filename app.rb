@@ -18,6 +18,10 @@ class MakersBnB < Sinatra::Base
 
   enable :method_override
   enable :sessions
+
+  get '/' do
+    redirect '/listings'
+  end
   
   get '/listings' do
     @listings = Listing.all
