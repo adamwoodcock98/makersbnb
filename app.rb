@@ -103,6 +103,9 @@ class MakersBnB < Sinatra::Base
     erb :sign_out
   end
 
+  def current_user
+    User.find_by(id: session[:user_id])
+  end
 
   run! if app_file == $0
 end
