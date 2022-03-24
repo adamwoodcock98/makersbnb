@@ -21,6 +21,7 @@ feature 'requesting a booking' do
     populate_listings_table
     visit '/listings'
     first('.listing').click_on 'view details'
+    Booking.create(guest_id: 2, listing_id: 1, start_date: "2022-08-01", end_date: "2022-08-09", is_approved: true)
   end
 
   scenario 'should display request UI elements' do
@@ -32,17 +33,22 @@ feature 'requesting a booking' do
   end
 
   scenario 'should show a quote and allow booking when listing is available' do
-    # fill_in('start_date', with: '01/04/2022')
-    # fill_in('start_date', with: '08/04/2022')
-    # click_on 'Check availability'
+    fill_in('start_date', with: "09/07/2022")
+    fill_in('end_date', with: "16/07/2022")
+    click_on 'Check availability'
 
-    # expect(page).to have_content 'Great news! This property is available to book for your selected dates.'
-    # expect(page).to have_content 'The price for your 7 night trip is: £1400.00'
-    # expect(page).to have_button 'Request booking'
+    expect(page).to have_content 'Great news! This property is available to book for your selected dates.'
+    expect(page).to have_content 'The price for your 7 night trip is:'
+    expect(page).to have_content '£1400.00'
+    expect(page).to have_button 'Request booking'
   end
 
   scenario 'should prevent booking when a property is not available' do
+    fill_in('start_date', with: "01/08/2022")
+    fill_in('end_date', with: "09/08/2022")
+    click_on 'Check availability'
 
+    expect(page).to have_content 'Sorry, this property is unavailable to book for your selected dates. Please select alternative dates and try again.'
   end
   
   scenario 'should show a booking request' do
