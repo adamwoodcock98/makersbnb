@@ -8,6 +8,9 @@ require_relative './lib/booking'
 class MakersBnB < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   
+  # Stop debug output to terminal
+  ActiveRecord::Base.logger.level = 1
+
   configure :development do
     register Sinatra::Reloader
   end
