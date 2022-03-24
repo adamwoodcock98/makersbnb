@@ -1,16 +1,19 @@
 require 'pg'
+require 'database_cleaner/active_record'
 
 module DatabaseHelper
+  DatabaseCleaner.strategy = :truncation
+
   def connection(db_name)
     PG.connect(dbname: db_name)
   end
 
   def setup_table(db_name = 'makersbnb_test', _table_name = 'listings')
-    connection(db_name).exec("CREATE TABLE listings(id SERIAL PRIMARY KEY, name VARCHAR(60), description VARCHAR(300), price INT, host_user_id INT);")
+    connection(db_name).exec("CREATE TABLE listings(id SERIAL PRIMARY KEY, name VARCHAR(60), description VARCHAR(300), price INT, host_id INT);")
   end
 
   def truncate_table
-    Listing.delete_all
+    DatabaseCleaner.clean
   end
 
   def populate_listings_table
@@ -28,4 +31,5 @@ module DatabaseHelper
       return false
     end
   end
+  
 end
