@@ -84,15 +84,21 @@ class MakersBnB < Sinatra::Base
     erb :sign_in
   end
 
-  post '/sessions' do
+  post '/sessions' do 
     user_id = User.authenticate(email: params['email'], password: params['password'])
     if user_id
-      session[:user_id]
+      session[:user_id] = user_id
       erb :sign_in_success
     else
       erb :sign_in_failure
     end
   end
+
+  delete '/sessions' do
+    session[:user_id] = nil
+    erb :sign_out
+  end
+
 
   run! if app_file == $0
 end
