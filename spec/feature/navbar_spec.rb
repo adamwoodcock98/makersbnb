@@ -20,7 +20,35 @@ feature "navbar can navigate through all pages" do
 
     expect(current_path).to eq('/listings')
   end
-  
 
+  before do
+    User.create(
+      first_name: 'Bruce',
+      last_name: 'Wayne',
+      user_name: 'TheBatman',
+      email: 'bats@example.com',
+      password: 'TheJokerSmells',
+    )
+    visit('/')
+    click_on 'Sign in'
+    fill_in 'email', with: 'bats@example.com'
+    fill_in 'password', with: 'TheJokerSmells'
+    find('#create_new_session').click_button('Sign in')
+  end
+
+  scenario "User should sign in and see Listings, Requests, Sign out buttons" do
+    expect(page).to have_button('Listings')
+    expect(page).to have_button('Requests')
+    expect(page).to have_button('Sign out')
+  end
+
+  scenario "user clicks sign out and can see the following Listings, Sign up and Sign up" do  
+    visit '/'
+    click_on 'Sign out'
+
+    expect(page).to have_button('Listings')
+    expect(page).to have_button('Sign up')
+    expect(page).to have_button('Sign in')
+  end
 
 end

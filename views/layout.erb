@@ -3,27 +3,25 @@
 </head>
 
 <ul class='navbar'>
-  <li>
-    <form action='/listings' method='get'>
-      <input class='button' type='submit' value='Listings'>
-    </form>
-  </li>
-  <li>
-    <form action='/requests' method='get'>
-        <input class='button' type='submit' value='Requests'>
-    </form>
-  </li>
-  <li>
+  <form action='/listings' method='get'>
+    <input class='button' type='submit' value='Listings'>
+  </form>
+<% unless current_user.nil? %>
+  <form action='/requests' method='get'>
+    <input class='button' type='submit' value='Requests'>
+  </form>
+  <form action='/sessions' method='post'>
+    <input id='hidden' type='hidden' name='_method' value='delete'>
+    <input class='button' type='submit' value='Sign out'>
+  </form>
+<% else %>
+  <form action='/users/new' method='GET'>
+    <input class='button' type='submit' value='Sign up'>
+  </form>
   <form action='/sessions/new' method='GET'>
     <input class='button' type='submit' value='Sign in'>
   </form>
-  </li>
-    <li>
-    <form action='/sessions' method='post'>
-        <input id='hidden' type='hidden' name='_method' value='delete'>
-        <input class='button' type='submit' value='Sign out'>
-    </form>
-  </li>
+<% end %>
 </ul>
 
 <%= yield %>
