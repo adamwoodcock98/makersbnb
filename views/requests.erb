@@ -1,5 +1,28 @@
 
 <h1 style="text-align:center;">Request for <%=@listing.name%></h1>
 
-<h3 style="text-align:center;">From Date<%=@booking.start_date%></h3>
-<h3 style="text-align:center;">End Date<%=@booking.end_date%></h3>
+
+
+<div>
+  <h3 style="text-align:center;">Other Requests for this Listing</h3>
+    <% @all_bookings.each { |booking| %>
+    <tr>
+      <td><h2><%= @listing.name %></h2></td>
+    </tr>
+    <tr>
+      <td><h4><%= User.find_by(id: booking.guest_id ).email %></h4></td>
+    </tr>
+    <tr>
+      <td><body>From <%= booking.start_date%> to <%= booking.end_date%></body></td>
+    </tr>
+    <tr>
+      <td><br></td>
+    </tr>
+  <% } %>
+</div>
+
+<td style="text-align: right;"> 
+            <form action="/listings/<%= listing.id %>">
+              <input type='submit' value='view details'/>
+            </form> 
+          </td>

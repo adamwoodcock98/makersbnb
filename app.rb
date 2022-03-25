@@ -67,9 +67,12 @@ class MakersBnB < Sinatra::Base
   # This route is currently untested
   post '/requests/:id/availability/request' do
     @user = current_user
-   @booking = Booking.create(
+    @current_page = params["listing_id"]
+    return flash[:notice] if @user == nil 
+    @all_bookings = Booking.where(listing_id: @current_page)
+    @booking = Booking.create(
       guest_id: @user.id,
-      listing_id: params["listing_id"],
+      listing_id: @current_page,
       # abduls notes: Session variables for start and end dates are being saved correctly, the issue is you cannot use param in the lines
       # 79 and 80 to ask for start and end dates.
       # start_date: params["start_date"],
