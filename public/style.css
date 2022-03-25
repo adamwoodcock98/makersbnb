@@ -74,4 +74,18 @@ tr {
   display: flex;
   justify-content: flex-end;
   align-items: right;
+  padding: 0px;
   }
+
+.left {
+  margin-right:auto;
+}
+
+.bubble_font{
+  font-family: 'Bubbler One', sans-serif;
+}
+  
+
+.hidden{
+  visibility: hidden;
+}
