@@ -29,6 +29,7 @@ class MakersBnB < Sinatra::Base
   end
   
   get '/listings' do
+    @user = current_user
     @listings = Listing.all
     erb :listings
   end

@@ -7,12 +7,12 @@
 </head>
 
 <h1 style="text-align:center;">Book a Home</h1>
-<h2 style="text-align:center;">View all of our wonderful properties!</h2>
+<h2 style="text-align:center; color:teal;">View all of our wonderful properties!</h2>
  <br>
 
 <div style="text-align:center;">
   <form action='/listings/new'>
-    <input type='submit' value='List a property' >
+    <input type='submit' value='List a property' style="background-color: coral;">
   </form>
 </div>
 
@@ -23,10 +23,10 @@
     <div class="listing">
       <table class="center" >
         <tr>
-          <td><h3><%= listing.name %></h3></td>
+          <td><h2 style="color:coralk;"><%= listing.name %></h2><h5 style="color:green;"><%="Your Listing" if @user != nil && listing.host_id == @user.id%></h5></td>
           <td style="text-align: right;"> 
             <form action="/listings/<%= listing.id %>">
-              <input type='submit' value='view details'/>
+              <input type='submit' value='view details' style="background-color:coral;"/>
             </form> 
           </td>
         </tr>
