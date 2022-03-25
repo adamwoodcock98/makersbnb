@@ -5,7 +5,6 @@ require_relative './lib/listing'
 require_relative './lib/booking'
 require_relative './lib/user'
 
-
 class MakersBnB < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   
@@ -44,11 +43,11 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/listings/new' do
-    unless session[:user_id].nil?
-      erb :add_listing
-    else
+    if session[:user_id].nil?
       session[:flash_message] = 'You need to be signed in to add a new listing'
       redirect '/listings'
+    else
+      erb :add_listing
     end
   end
   
@@ -107,11 +106,10 @@ class MakersBnB < Sinatra::Base
     if user_id
       session[:user_id] = user_id
       session[:flash_message] = 'You have signed in correctly'
-      redirect '/listings'
     else
       session[:flash_message] = 'Unsuccessful sign-in: Please check your email and password'
-      redirect '/listings'
     end
+    redirect '/listings'
   end
 
   delete '/sessions' do
