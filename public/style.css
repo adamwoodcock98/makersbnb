@@ -70,15 +70,18 @@ tr {
   display: flex;
   justify-content: flex-end;
   align-items: right;
+
+  padding: 0px;
   }
 
-  .column {
-    float: left;
-    width: 30%;
-  }
+.left {
+  margin-right:auto;
+}
 
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+.bubble_font{
+  font-family: 'Bubbler One', sans-serif;
+}
+
+.hidden{
+  visibility: hidden;
+}

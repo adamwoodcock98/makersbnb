@@ -8,7 +8,5 @@ feature 'Sign out' do
     expect(page).to have_button('Sign out')
     click_button('Sign out')
     expect(page).to have_content('You have signed out')
-    # save_and_open_page
-    # print page.html
   end
 end
