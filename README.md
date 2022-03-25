@@ -209,9 +209,9 @@ navbar can navigate through all pages
   user clicks sign out and can see the following Listings, Sign up and Sign up
 
 Guest requests booking
-  Guest can request a specific property booking (FAILED - 1)
-  when host clicks on Confirm booking it should post to /confirm (FAILED - 2)
-  when host clicks on Deny Booking it should go to /requests (FAILED - 3)
+  Guest can request a specific property booking
+  when host clicks on Approve it should post to /confirm
+  when host clicks on Reject it should go to /requests
 
 Sign In
   when a user provides correct details they can sign-in
@@ -256,4 +256,17 @@ User
         returns nil
     when given incorrect email
       returns nil
+
+Finished in 12.61 seconds (files took 1.78 seconds to load)
+36 examples, 0 failures
+
+
+COVERAGE:  99.05% -- 419/423 lines in 19 files
+
++----------+--------+-------+--------+---------+
+| coverage | file   | lines | missed | missing |
++----------+--------+-------+--------+---------+
+|  95.56%  | app.rb | 90    | 4      | 152-155 |
++----------+--------+-------+--------+---------+
+18 file(s) with 100% coverage not shown
 ```
