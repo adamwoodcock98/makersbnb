@@ -9,4 +9,13 @@ feature 'User Registration' do
     click_on 'Register'
     expect(page).to have_content 'Welcome Bruce Waynee, your username is Batman!'
   end
+  scenario "user cannot create an account without username" do
+    visit('/users/new')
+    fill_in 'first_name', with: 'Bruce'
+    fill_in 'last_name', with: 'Waynee'
+    fill_in 'email', with: 'batman@example.com'
+    fill_in 'password', with: 'TheChosen'
+    click_on 'Register'
+    expect(page).to have_content 'Unsuccessful Sign-up'
+  end
 end

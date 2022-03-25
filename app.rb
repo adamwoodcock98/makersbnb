@@ -74,6 +74,7 @@ class MakersBnB < Sinatra::Base
     @booking = Booking.create(
       guest_id: @user.id,
       listing_id: @current_page,
+      host_id: params[:host_id],
       start_date: session[:selected_start],
       end_date: session[:selected_end],
       is_approved: false
@@ -89,6 +90,13 @@ class MakersBnB < Sinatra::Base
     @booking.save!
   end
 
+  get '/requests' do
+    @user = current_user
+    @guest_requests = Booking.where(guest_id: @user.id) unless current_user == nil
+    @host_requests = Booking.where(host_id: @user.id, is_approved: false) unless current_user == nil
+    erb :all_requests
+  end
+
   get '/users/new' do
     erb :new_user
   end
@@ -101,8 +109,12 @@ class MakersBnB < Sinatra::Base
       email: params['email'],
       password: params['password'],
     )
-    session[:user_id] = @user.id unless @user.id.nil?
-    session[:flash_message] = "Welcome #{@user.first_name} #{@user.last_name}, your username is #{@user.user_name}!"
+    if @user.id.nil?
+      session[:flash_message] = "Unsuccessful Sign-up"
+    else
+      session[:user_id] = @user.id
+      session[:flash_message] = "Welcome #{@user.first_name} #{@user.last_name}, your username is #{@user.user_name}!"
+    end
     redirect '/listings'
   end
 

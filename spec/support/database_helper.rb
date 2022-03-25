@@ -14,5 +14,23 @@ module DatabaseHelper
       Listing.create(name: 'Little House', description: "Wee little house", pence_price: 950, host_id: 2)
       Listing.create(name: 'Cardboard Box', description: "Eco-friendly living", pence_price: 300, host_id: 6)
   end
+
+  def populate_some_users
+    User.create(
+      first_name: 'Wanda',
+      last_name: 'Maximoff',
+      user_name: 'the_scarlett_witch',
+      email: 'witch.scarlett@avengers.com',
+      password: 'V1sion',
+    )
+
+    User.create(
+      first_name: 'Stephen',
+      last_name: 'Strange',
+      user_name: 'DrStrange',
+      email: 'strange.dr@avengers.com',
+      password: 'timeSt0ne',
+    )
+  end
   
 end
