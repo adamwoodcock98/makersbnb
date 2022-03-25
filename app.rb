@@ -96,8 +96,12 @@ class MakersBnB < Sinatra::Base
       email: params['email'],
       password: params['password'],
     )
-    session[:user_id] = @user.id unless @user.id.nil?
-    session[:flash_message] = "Welcome #{@user.first_name} #{@user.last_name}, your username is #{@user.user_name}!"
+    if @user.id.nil?
+      session[:flash_message] = "Unsuccessful Sign-up"
+    else
+      session[:user_id] = @user.id
+      session[:flash_message] = "Welcome #{@user.first_name} #{@user.last_name}, your username is #{@user.user_name}!"
+    end
     redirect '/listings'
   end
 
