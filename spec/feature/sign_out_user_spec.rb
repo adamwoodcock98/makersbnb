@@ -4,10 +4,6 @@ feature 'Sign out' do
   end
 
   scenario 'User can sign out' do
-    visit('/sessions/new')
-    fill_in 'email', with: 'bats@example.com'
-    fill_in 'password', with: 'TheJokerSmells'
-    find('#create_new_session').click_button('Sign in')
     expect(page).to have_content('You have signed in correctly')
     expect(page).to have_button('Sign out')
     click_button('Sign out')
