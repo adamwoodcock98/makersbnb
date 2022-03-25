@@ -1,35 +1,96 @@
 <head>
-  <link href="<%= url('/style.css') %>" rel="stylesheet" type="text/css" />
-</head>
+    <style>
+    {
+        box-sizing: border-box;
+    }
+    .column {
+    float: left;
+    width: 50%;
+    }
+
+    .row:after {
+    content: "";
+    display: table;
+    clear: both;
+    }
+
+    tr, td {
+      padding: 10px;
+      margin: 1px;
+    }
+    </style>
+ </head>
 
 <% if current_user != nil %>
   <div style="text-align:center;">
     <h1>Hello, <%=@user.first_name.titleize%></h1>
     <h2>Your requests</h2>
     <br>
-    <table class="center">
-      <tr>
-        <th><h1>Requests you've made</h1></th>
-        <th><h1>Requests you've received</h1></th>
-      </tr>
+    <body>
+    <div class="row">
+      <div class="column">
+        <table class="center">
+          <tr>
+            <th><h1>Requests you've made</h1></th>
+          </tr>
 
-      <%@guest_requests.each { |listing| %>
-        <tr>
-          <td><h2><%= Listing.find(listing.listing_id).name %></h2></td>
-        </tr>
-        <tr>
-          <td><h4><%= Listing.find(listing.listing_id).description %></h4></td>
-        </tr>
-        <tr>
-          <td><body>From <%=listing.start_date%> to <%=listing.end_date%></body></td>
-        </tr>
-        <tr>
-          <td><br></td>
-        </tr>
-      <% } %>
+          <%@guest_requests.each { |listing| %>
+            <tr style="text-align:center;">
+              <td><h2><%= Listing.find(listing.listing_id).name %></h2></td>
+            </tr>
+            <tr style="text-align:center;">
+              <td><h4><%= Listing.find(listing.listing_id).description %></h4></td>
+            </tr>
+            <tr style="text-align:center;">
+              <td><body>From <%=listing.start_date%> to <%=listing.end_date%></body></td>
+            </tr>
+            <tr style="text-align:center;">
+              <td><%if listing.is_approved == true%><h5 style="color:green;">Approved</h5><%else%><h5 style="color:orange;">Pending</h5><%end%></td>
+            </tr>
+            <tr>
+              <td><hr><br></td>
+            </tr>
+          <% } %>
+        </table>
+      </div>
 
-    </table>
+      <div class="column"">
+          <table class="center">
+          <tr>
+            <th><h1>Requests you've received</h1></th>
+          </tr>
+
+          <%@host_requests.each { |listing| %>
+            <tr style="text-align:center;">
+              <td><h2><%= Listing.find(listing.listing_id).name %></h2></td>
+            </tr>
+            <tr style="text-align:center;">
+              <td><body>From <%=listing.start_date%> to <%=listing.end_date%></body></td>
+            </tr>
+            <tr style="text-align:center;">
+              <td><body>Guest: <%=User.find(listing.guest_id).first_name%> <%=User.find(listing.guest_id).last_name%></body></td>
+            </tr>
+            <tr style="text-align:center;">
+              <td><body>Guest email: <%=User.find(listing.guest_id).email%></body></td>
+            </tr>
+            <tr style="text-align:center;">
+              <td>
+                <form action='/listings'>
+                  <input type="submit" value="View request">
+                </form>
+              </td>
+            </tr>
+            <tr>
+              <td><hr><br></td>
+            </tr>
+          <% } %>
+        </table>
+      </div>
+    </div>
+ </body>
   </div>
 <% else %>
   <h1>Please sign in to view requests</h2>
 <% end %>
+
+

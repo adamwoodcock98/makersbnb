@@ -27,9 +27,8 @@ feature 'All Requests' do
     context 'guest booking requests' do
 
       before do
-        create_user_and_sign_in
         populate_listings_table
-        Booking.create(guest_id: 1, listing_id: 1, start_date: "2022-06-01", end_date: "2022-06-08", is_approved: false)
+        Booking.create(guest_id: 1, listing_id: 1, start_date: "2022-06-01", end_date: "2022-06-08", is_approved: true)
         Booking.create(guest_id: 1, listing_id: 2, start_date: "2022-07-01", end_date: "2022-07-08", is_approved: false)
       end
 
@@ -38,10 +37,39 @@ feature 'All Requests' do
         expect(page).to have_content 'Mid-Century Modern Home'
         expect(page).to have_content 'In beautiful, sunny Miami by the Oc...'
         expect(page).to have_content 'From 2022-06-01 to 2022-06-08'
+        expect(page).to have_content 'Approved'
 
         expect(page).to have_content 'Big House'
         expect(page).to have_content 'Big old house'
         expect(page).to have_content 'From 2022-07-01 to 2022-07-08'
+        expect(page).to have_content 'Pending'
+      end
+
+    end
+
+    context 'host booking requests' do
+
+      before do
+        populate_some_users
+        Booking.create(guest_id: 2, listing_id: 3, host_id: 1, start_date: "2022-09-12", end_date: "2022-09-22", is_approved: false)
+        Booking.create(guest_id: 3, listing_id: 3, host_id: 1, start_date: "2022-10-03", end_date: "2022-10-10", is_approved: false)
+      end
+      
+      scenario 'should display host requests' do
+        visit '/requests'
+        expect(page).to have_content 'Little House'
+        expect(page).to have_content 'From 2022-09-12 to 2022-09-22'
+        expect(page).to have_content 'Guest: Wanda Maximoff'
+        expect(page).to have_content 'Guest email: witch.scarlett@avengers.com'
+
+        expect(page).to have_content 'Little House'
+        expect(page).to have_content 'From 2022-10-03 to 2022-10-10'
+        expect(page).to have_content 'Guest: Stephen Strange'
+        expect(page).to have_content 'Guest email: strange.dr@avengers.com'
+      end
+
+      scenario 'should view requests' do
+
       end
 
     end

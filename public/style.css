@@ -39,12 +39,8 @@ table.center {
   width: 60%;
   margin-left: 20%; 
   margin-right: 20%;
-  border-bottom: 1px solid #ddd;
-  
-}
-
-table:hover {
-  background-color: coral;
+  border-style: 1px solid;
+  border-color: coral;
 }
 
 th, td {
