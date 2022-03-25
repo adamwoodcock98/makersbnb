@@ -34,10 +34,12 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/listings' do
+    @host = current_user
     Listing.create(
       name: params['name'],
       description: params['description'], 
-      pence_price: (params['price'].to_i * 100)
+      pence_price: (params['price'].to_i * 100),
+      host_id: @host.id
     )
     redirect '/listings'
   end
@@ -69,16 +71,34 @@ class MakersBnB < Sinatra::Base
     redirect "/listings/#{params[:id]}/availability"
   end
 
+  get '/requests/:listing_id/confirmation' do
+    @user = current_user
+    @booking = Booking.find_by(id: params[:selected_booking_id] )
+    @listing = Listing.find_by(id: @booking.listing_id)
+    @all_bookings = Booking.where(listing_id: @listing.id)
+    erb :requests
+  end
+
   # This route is currently untested
   post '/requests/:id/availability/request' do
-    Booking.create(
-      guest_id: 8,
-      listing_id: params[:id],
+    @user = current_user
+    puts "listing id: #{params}"
+    @booking = Booking.create(
+      guest_id: @user.id,
+      listing_id: params[:listing_id],
       host_id: params[:host_id],
       start_date: session[:selected_start],
       end_date: session[:selected_end],
       is_approved: false
     )
+    redirect '/requests'
+  end
+
+  post '/confirm' do
+    @booking = Booking.find_by(id: params[:name])
+    @booking.is_approved = true
+    @booking.save!
+    redirect '/requests'
   end
 
   get '/requests' do

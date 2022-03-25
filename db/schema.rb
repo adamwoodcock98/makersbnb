@@ -37,4 +37,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_23_221719) do
     t.string "email"
     t.string "password_hash"
   end
+
 end

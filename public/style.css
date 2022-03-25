@@ -85,3 +85,12 @@ tr {
 .hidden{
   visibility: hidden;
 }
+
+.requests{
+  text-align: center;
+  border: grey;
+}
+
+.inline_buttons{
+  text-align: center;
+}
