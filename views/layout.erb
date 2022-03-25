@@ -1,9 +1,18 @@
 <head>
   <link href="<%= url('/style.css') %>" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bubbler+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
   <ul class='navbar'>
+  <div class='left'>
+    <ul>
+      <a><img src='https://drive.google.com/uc?export=view&id=1xTXyGOakZ9lv0CpRdahW_m_SWo6K7fTM' alt='Logo Scary House' width='80' height='65'/></a>
+      <h2 class='bubble_font'>ScareBnB</h2>
+    </ul>
+  </div>
     <form action='/listings' method='get'>
       <input class='button' type='submit' value='Listings'>
     </form>
@@ -24,9 +33,10 @@
     </form>
   <% end %>
   </ul>
-<% if @flash_message %>
-  <p style="position: absolute; bottom: 0; left: 0; width: 100%; text-align: center;"><%= @flash_message %></p>
-<% end %>
+  
+  <% if @flash_message %>
+    <p style="position: absolute; bottom: 0; left: 0; width: 100%; text-align: center;"><%= @flash_message %></p>
+  <% end %>
 </body>
 
 <%= yield %>
