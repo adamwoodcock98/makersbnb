@@ -14,12 +14,13 @@ require 'capybara/rspec'
 require 'rspec'
 require './app'
 require_relative './support/database_helper'
-require_relative './support/web_helper'
+require_relative './support/registration_helper'
 
 Capybara.app = MakersBnB
 
 RSpec.configure do |config|
   config.include DatabaseHelper
+  config.include RegistrationHelper
 
   config.before(:each) do
     truncate_table
