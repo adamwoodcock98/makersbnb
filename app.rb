@@ -44,7 +44,12 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/listings/new' do
-    erb :add_listing
+    unless session[:user_id].nil?
+      erb :add_listing
+    else
+      session[:flash_message] = 'You need to be signed in to add a new listing'
+      redirect '/listings'
+    end
   end
   
   get '/listings/:id' do
