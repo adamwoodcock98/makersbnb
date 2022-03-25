@@ -1,4 +1,5 @@
 require 'pg'
+require 'date'
 
 class Listing < ActiveRecord::Base
 
@@ -26,13 +27,17 @@ class Listing < ActiveRecord::Base
   def listing_dates_booked(id)
     all_booked_dates = []
     Booking.where(listing_id: id, is_approved: true).each { |booking|
-      all_booked_dates << get_range_of_dates(booking.start_date, booking.end_date)
+      all_booked_dates << get_range_of_dates(booking.start_date.to_s, booking.end_date.to_s)
     }
     all_booked_dates.flatten
   end
 
   def get_range_of_dates(start_date, end_date)
-    (Date.parse(start_date)..Date.parse(end_date)).to_a
+    dates_array = []
+    (Date.parse(start_date)..Date.parse(end_date)).each { |date|
+      dates_array << date.strftime("%d/%m/%y")
+    }
+    dates_array
   end
 
 end
