@@ -113,6 +113,11 @@ class MakersBnB < Sinatra::Base
     erb :sign_in
   end
 
+  delete '/sessions' do
+    session[:user_id] = nil
+    erb :sign_out
+  end
+
   post '/sessions' do 
     user_id = User.authenticate(email: params['email'], password: params['password'])
     if user_id
