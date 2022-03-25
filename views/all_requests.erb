@@ -35,7 +35,7 @@
           </tr>
 
           <%@guest_requests.each { |booking| %>
-          <%= puts "booking: #{booking.listing_id}"%>
+          
             <tr style="text-align:center;">
               <td><h2><%= Listing.find(booking.listing_id).name %></h2></td>
             </tr>

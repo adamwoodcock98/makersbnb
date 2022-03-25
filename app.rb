@@ -78,7 +78,6 @@ class MakersBnB < Sinatra::Base
   # This route is currently untested
   post '/requests/:id/availability/request' do
     @user = current_user
-    puts "listing id: #{params}"
     @booking = Booking.create(
       guest_id: @user.id,
       listing_id: params[:listing_id],

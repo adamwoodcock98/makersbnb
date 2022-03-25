@@ -1,6 +1,7 @@
 feature "User can add a new space" do
 
   scenario "User should be able to describe their listing" do
+    create_user_and_sign_in
     visit '/listings/new'
     fill_in "name", with: "Italian styled villa"
     fill_in "description", with: "I have a summer house with 5 rooms near the beach"
