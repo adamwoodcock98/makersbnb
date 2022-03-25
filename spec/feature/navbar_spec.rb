@@ -1,4 +1,9 @@
 feature "navbar can navigate through all pages" do
+  before do
+    create_default_user
+    sign_in
+  end
+
   scenario "clicking on 'Listings from listings/new should return the user back to /listings" do
     visit '/listings'
     click_on 'List a property'
@@ -20,22 +25,7 @@ feature "navbar can navigate through all pages" do
 
     expect(current_path).to eq('/listings')
   end
-
-  before do
-    User.create(
-      first_name: 'Bruce',
-      last_name: 'Wayne',
-      user_name: 'TheBatman',
-      email: 'bats@example.com',
-      password: 'TheJokerSmells',
-    )
-    visit('/')
-    click_on 'Sign in'
-    fill_in 'email', with: 'bats@example.com'
-    fill_in 'password', with: 'TheJokerSmells'
-    find('#create_new_session').click_button('Sign in')
-  end
-
+ 
   scenario "User should sign in and see Listings, Requests, Sign out buttons" do
     expect(page).to have_button('Listings')
     expect(page).to have_button('Requests')

@@ -12,7 +12,8 @@ feature 'All Requests' do
   context 'signed in' do
 
     before do
-      create_user_and_sign_in
+      create_default_user
+      sign_in
       populate_listings_table
     end
 

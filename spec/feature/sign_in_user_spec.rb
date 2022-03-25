@@ -1,12 +1,6 @@
 feature 'Sign In' do
   before do
-    User.create(
-      first_name: 'Bruce',
-      last_name: 'Wayne',
-      user_name: 'TheBatman',
-      email: 'bats@example.com',
-      password: 'TheJokerSmells',
-    )
+    create_default_user
   end
 
   scenario 'when a user provides correct details they can sign-in' do
