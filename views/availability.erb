@@ -24,7 +24,7 @@
     <h4>Great news! This property is available to book for your selected dates.</h4>
     <body>The price for your <%= @listing.number_of_nights(@selected_start, @selected_end) %> night trip is: </body><br>
     <h4> £<%= @listing.cost(@selected_start, @selected_end)%>.00 inc. VAT </h4>
-    <form action='/requests/:id/availability/request' method="post">
+    <form action="/requests/<%=@listing.id%>/availability/request" method="post">
       <input type="submit" value="Request booking">
       <input type="hidden" value=<%=@listing.id%> name="listing_id">
       <input type="hidden" value=<%=@listing.host_id%> name="host_id">

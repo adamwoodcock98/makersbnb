@@ -34,18 +34,19 @@
             <th><h1>Requests you've made</h1></th>
           </tr>
 
-          <%@guest_requests.each { |listing| %>
+          <%@guest_requests.each { |booking| %>
+          <%= puts "booking: #{booking.listing_id}"%>
             <tr style="text-align:center;">
-              <td><h2><%= Listing.find(listing.listing_id).name %></h2></td>
+              <td><h2><%= Listing.find(booking.listing_id).name %></h2></td>
             </tr>
             <tr style="text-align:center;">
-              <td><h4><%= Listing.find(listing.listing_id).description %></h4></td>
+              <td><h4><%= Listing.find(booking.listing_id).description %></h4></td>
             </tr>
             <tr style="text-align:center;">
-              <td><body>From <%=listing.start_date%> to <%=listing.end_date%></body></td>
+              <td><body>From <%=booking.start_date%> to <%=booking.end_date%></body></td>
             </tr>
             <tr style="text-align:center;">
-              <td><%if listing.is_approved == true%><h5 style="color:green;">Approved</h5><%else%><h5 style="color:orange;">Pending</h5><%end%></td>
+              <td><%if booking.is_approved == true%><h5 style="color:green;">Approved</h5><%else%><h5 style="color:orange;">Pending</h5><%end%></td>
             </tr>
             <tr>
               <td><hr><br></td>
@@ -60,23 +61,24 @@
             <th><h1>Requests you've received</h1></th>
           </tr>
 
-          <%@host_requests.each { |listing| %>
+          <%@host_requests.each { |booking| %>
             <tr style="text-align:center;">
-              <td><h2><%= Listing.find(listing.listing_id).name %></h2></td>
+              <td><h2><%= Listing.find(booking.listing_id).name %></h2></td>
             </tr>
             <tr style="text-align:center;">
-              <td><body>From <%=listing.start_date%> to <%=listing.end_date%></body></td>
+              <td><body>From <%=booking.start_date%> to <%=booking.end_date%></body></td>
             </tr>
             <tr style="text-align:center;">
-              <td><body>Guest: <%=User.find(listing.guest_id).first_name%> <%=User.find(listing.guest_id).last_name%></body></td>
+              <td><body>Guest: <%=User.find(booking.guest_id).first_name%> <%=User.find(booking.guest_id).last_name%></body></td>
             </tr>
             <tr style="text-align:center;">
-              <td><body>Guest email: <%=User.find(listing.guest_id).email%></body></td>
+              <td><body>Guest email: <%=User.find(booking.guest_id).email%></body></td>
             </tr>
             <tr style="text-align:center;">
               <td>
-                <form action='/listings'>
+                <form action='/requests/:listing_id/confirmation'>
                   <input type="submit" value="View request">
+                  <input type="hidden" value="<%=booking.id%>" name="selected_booking_id">
                 </form>
               </td>
             </tr>

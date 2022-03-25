@@ -1,9 +1,19 @@
 <body>
   <h1 style="text-align:center;">Request for <%=@listing.name%></h1><br>
 
-  <h3 style="text-align:center;">From <%=@user.email%></h3>
-  <h3 style="text-align:center;">From date: <%=@booking.start_date%></h3>
-  <h3 style="text-align:center;">To: <%=@booking.end_date%></h3>
+  <h2 style="text-align:center;">From <%=@user.email%></h2>
+  <h3 style="text-align:center;">From date: <%=@booking.start_date%> To: <%=@booking.end_date%></h3>
+
+  <div class='inline_buttons' style="text-align:center;">
+      <form action='/confirm' method='post'>
+        <input type='hidden' name='name' value="<%=@booking.id%>">
+        <input class='button' type='submit' value='Approve'>
+      </form>
+        <form action='/requests' method='get'>
+        <input class='button' type='submit' value='Reject'>
+      </form>
+    </div>
+  </body>
 
   <div>
     <div>
@@ -34,13 +44,4 @@
     
   </div>
 
-  <div class='inline_buttons'>
-    <form action='/confirm' method='post'>
-      <input type='hidden' name='name' value="<%=@booking.id%>">
-      <input class='button' type='submit' value='Confirm Booking'>
-    </form>
-      <form action='/requests' method='get'>
-      <input class='button' type='submit' value='Deny Booking'>
-    </form>
-  </div>
-</body>
+  
