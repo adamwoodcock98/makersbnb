@@ -52,7 +52,6 @@ class MakersBnB < Sinatra::Base
     erb :view_property
   end
 
-  # This route is currently untested
   get '/listings/:id/availability' do
     @listing = Listing.find(params[:id])
     @selected_start = session[:selected_start]
@@ -60,7 +59,6 @@ class MakersBnB < Sinatra::Base
     erb :availability
   end
 
-  # This route is currently untested
   post '/listings/:id/availability' do
     session[:selected_start] = params[:start_date]
     session[:selected_end] = params[:end_date]
@@ -103,21 +101,19 @@ class MakersBnB < Sinatra::Base
     user_id = User.authenticate(email: params['email'], password: params['password'])
     if user_id
       session[:user_id] = user_id
-      # erb :sign_in_success
-      session[:flash_message] = 'Successfully Signed-in'
+      session[:flash_message] = 'You have signed in correctly'
       redirect '/listings'
     else
-      session[:flash_message] = 'Did not successfully Sign-in'
+      session[:flash_message] = 'Unsuccessful sign-in: Please check your email and password'
       redirect '/listings'
-      # erb :sign_in_failure
     end
   end
 
   delete '/sessions' do
+    user_name = current_user.user_name
     session[:user_id] = nil
-    session[:flash_message] = 'You have Signed-out'
+    session[:flash_message] = "#{user_name}: You have signed out"
     redirect '/listings'
-    # erb :sign_out
   end
 
   def current_user
