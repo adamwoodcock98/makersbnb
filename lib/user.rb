@@ -3,6 +3,8 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   include BCrypt
 
+  validates :user_name, :email, :password, presence: true
+
   def self.authenticate(email:, password:)
     user = find_by(email: email)
     return nil if user.nil?
