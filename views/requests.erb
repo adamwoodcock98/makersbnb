@@ -1,28 +1,46 @@
+<body>
+  <h1 style="text-align:center;">Request for <%=@listing.name%></h1><br>
 
-<h1 style="text-align:center;">Request for <%=@listing.name%></h1>
+  <h3 style="text-align:center;">From <%=@user.email%></h3>
+  <h3 style="text-align:center;">From date: <%=@booking.start_date%></h3>
+  <h3 style="text-align:center;">To: <%=@booking.end_date%></h3>
 
+  <div>
+    <div>
+      <h3 style="text-align:center;">Other Requests for this Listing</h3><br><br>
 
+    </div>
+  </div>
 
-<div>
-  <h3 style="text-align:center;">Other Requests for this Listing</h3>
-    <% @all_bookings.each { |booking| %>
-    <tr>
-      <td><h2><%= @listing.name %></h2></td>
-    </tr>
-    <tr>
-      <td><h4><%= User.find_by(id: booking.guest_id ).email %></h4></td>
-    </tr>
-    <tr>
-      <td><body>From <%= booking.start_date%> to <%= booking.end_date%></body></td>
-    </tr>
-    <tr>
-      <td><br></td>
-    </tr>
-  <% } %>
-</div>
+  <div class='requests'>
+    <label>
+      <td > 
+        <% @all_bookings.each { |booking| %>
+        <% unless booking.id == @booking.id%>
+          <form action="/requests">
 
-<td style="text-align: right;"> 
-            <form action="/listings/<%= listing.id %>">
-              <input type='submit' value='view details'/>
-            </form> 
-          </td>
+              <td><h4><%= User.find_by(id: booking.guest_id ).email %></h4></td>
+
+              <td><body>From <%= booking.start_date%> to <%= booking.end_date%></body></td>
+
+              <td><br></td>
+
+            <input class='hidden' type='submit'/>
+          </form> 
+        <%end%>
+        <% } %>
+      </td>
+    </label>
+    
+  </div>
+
+  <div class='inline_buttons'>
+    <form action='/confirm' method='post'>
+      <input type='hidden' name='name' value="<%=@booking.id%>">
+      <input class='button' type='submit' value='Confirm Booking'>
+    </form>
+      <form action='/requests' method='get'>
+      <input class='button' type='submit' value='Deny Booking'>
+    </form>
+  </div>
+</body>
