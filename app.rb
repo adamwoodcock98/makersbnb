@@ -21,6 +21,10 @@ class MakersBnB < Sinatra::Base
   enable :method_override
   enable :sessions
 
+  before do
+    @flash_message = session.delete(:flash_message)
+  end
+
   get '/' do
     redirect '/listings'
   end
@@ -48,7 +52,6 @@ class MakersBnB < Sinatra::Base
     erb :view_property
   end
 
-  # This route is currently untested
   get '/listings/:id/availability' do
     @listing = Listing.find(params[:id])
     @selected_start = session[:selected_start]
@@ -56,7 +59,6 @@ class MakersBnB < Sinatra::Base
     erb :availability
   end
 
-  # This route is currently untested
   post '/listings/:id/availability' do
     session[:selected_start] = params[:start_date]
     session[:selected_end] = params[:end_date]
@@ -67,11 +69,19 @@ class MakersBnB < Sinatra::Base
   post '/requests/:id/availability/request' do
     Booking.create(
       guest_id: 8,
-      listing_id: params["listing_id"],
-      start_date: params["start date"],
-      end_date: params["end_date"],
+      listing_id: params[:id],
+      host_id: params[:host_id],
+      start_date: session[:selected_start],
+      end_date: session[:selected_end],
       is_approved: false
     )
+  end
+
+  get '/requests' do
+    @user = current_user
+    @guest_requests = Booking.where(guest_id: @user.id) unless current_user == nil
+    @host_requests = Booking.where(host_id: @user.id, is_approved: false) unless current_user == nil
+    erb :all_requests
   end
 
   get '/users/new' do
@@ -86,7 +96,13 @@ class MakersBnB < Sinatra::Base
       email: params['email'],
       password: params['password'],
     )
-    erb :welcome_user
+    if @user.id.nil?
+      session[:flash_message] = "Unsuccessful Sign-up"
+    else
+      session[:user_id] = @user.id
+      session[:flash_message] = "Welcome #{@user.first_name} #{@user.last_name}, your username is #{@user.user_name}!"
+    end
+    redirect '/listings'
   end
 
   get '/sessions/new' do
@@ -97,15 +113,19 @@ class MakersBnB < Sinatra::Base
     user_id = User.authenticate(email: params['email'], password: params['password'])
     if user_id
       session[:user_id] = user_id
-      erb :sign_in_success
+      session[:flash_message] = 'You have signed in correctly'
+      redirect '/listings'
     else
-      erb :sign_in_failure
+      session[:flash_message] = 'Unsuccessful sign-in: Please check your email and password'
+      redirect '/listings'
     end
   end
 
   delete '/sessions' do
+    user_name = current_user.user_name
     session[:user_id] = nil
-    erb :sign_out
+    session[:flash_message] = "#{user_name}: You have signed out"
+    redirect '/listings'
   end
 
   def current_user
